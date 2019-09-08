@@ -1,0 +1,44 @@
+---
+# tasks file for ansible-fail2ban
+# apt
+- name: Update APT package cache
+  apt: update_cache=yes
+  tags: apt
+- name: Install packages and dependencies
+  apt: >
+    name={{ packages }} state=latest
+  tags: apt
+
+# fail2ban
+- name: Override some basic fail2ban configurations
+  copy:
+    src: ../templates/default.j2
+    dest: /etc/fail2ban/jail.d/defaults-debian.conf
+    owner: root
+    group: root
+    mode: 0644
+- name: Write fail2ban ssh configuration
+  copy:
+    src: ../templates/ssh.j2
+    dest: /etc/fail2ban/jail.d/ssh.conf
+    owner: root
+    group: root
+    mode: 0644
+- name: Write fail2ban Bind configuration
+  copy:
+    src: ../templates/named.j2
+    dest: /etc/fail2ban/jail.d/named.conf
+    owner: root
+    group: root
+    mode: 0644
+- name: Write fail2ban openvpn configuration
+  copy:
+    src: ../templates/openvpn.j2
+    dest: /etc/fail2ban/jail.d/openvpn.conf
+    owner: root
+    group: root
+    mode: 0644
+- name: copy filer openvpn for fail2ban
+  copy:
+    src: ../files/openvpn.conf
+    dest: /etc/fail2ban/filter.d/openvpn.conf

@@ -1,0 +1,14 @@
+[named-refused-tcp]
+  enabled  = true
+  port     = domain,953
+  protocol = tcp
+  filter   = named-refused
+  logpath  = "{{ named_log }}"
+
+[named-refused-udp]
+  enabled  = true
+  port     = domain,953
+  protocol = udp
+  filter   = named-refused
+  logpath  = "{{ named_log }}"
+

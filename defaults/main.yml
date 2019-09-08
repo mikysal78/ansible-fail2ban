@@ -1,0 +1,7 @@
+---
+# defaults file for ansible-fail2ban
+mail_admin: admin@yourmail.com
+ssh_port: 22
+
+# Log Bind
+named_log: /var/cache/bind/data/security.log

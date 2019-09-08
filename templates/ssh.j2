@@ -1,0 +1,11 @@
+[sshd]
+  enabled   = true
+  port      = {{ ssh_port }}
+  filter    = sshd
+  maxretry  = 3
+  bantime   = 24h
+  findtime  = 1h
+  logpath   = /var/log/auth.log
+  destemail = {{ mail_admin }}
+  sendername = "[Fail2Ban SSH]: {{ inventory_hostname }}"
+  action = %(banaction)s[name=%(__name__)s, port="%(port)s", protocol="%(protocol)s", chain="%(chain)s"] %(mta)s-whois-lines[name=%(__name__)s, dest="%(destemail)s", logpath=%(logpath)s, chain="%(chain)s", sendername="%(sendername)s"]

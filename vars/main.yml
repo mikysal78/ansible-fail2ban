@@ -1,0 +1,4 @@
+---
+# vars file for ansible-fail2ban
+packages:
+  - fail2ban
